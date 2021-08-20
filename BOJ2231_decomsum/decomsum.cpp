@@ -4,33 +4,32 @@ using namespace std;
 
 int decom(int sum)
 {
-    if (sum < 11)
-        return 0;
-    else 
+    char toChar[7];
+    sprintf(toChar, "%d", sum);
+    int digit = (int)strlen(toChar);
+
+    bool loop = true;
+    int current = sum > 9 * digit
+        ? sum - 9 * digit : 0;
+    while (loop && current < sum)
     {
+        current++;
+        
         char toChar[7];
-        sprintf(toChar, "%d", sum);
+        sprintf(toChar, "%d", current);
         int digit = (int)strlen(toChar);
 
-        bool loop = true;
-        int current = sum > (toChar[0] - '0' - 1) + 9 * (digit - 1) 
-            ? sum - (toChar[0] - '0' - 1) + 9 * (digit - 1) : sum;
-        while (loop)
-        {
-            current++;
-            
-            char toChar[7];
-            sprintf(toChar, "%d", current);
+        int remain = 0;
+        for (int i=0; i < digit; i++)
+            remain += toChar[i] - '0';
 
-            int remain = 0;
-            for (int i=0; i < digit; i++)
-                remain += toChar[i] - '0';
-
-            loop = sum != current + remain;
-        }
-
-        return current;
+        loop = sum != current + remain;
     }
+
+    if (loop)
+        return 0;
+    else
+        return current;
 }
 
 int main()
