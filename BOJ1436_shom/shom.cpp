@@ -6,8 +6,13 @@ using namespace std;
 string movienum(int index)
 {
     string currentS = "666";
+    string add = "666";
+    string make = "";
+    string newAdd = "";
+
     int digit = 0;
     int viindex = 1;
+
     if (index > 1)
     {
         for (int i=1; i < index; i++)
@@ -15,43 +20,49 @@ string movienum(int index)
             currentS = to_string(viindex);
             digit = currentS.length() + 3;
 
-            int pos6 = currentS.find('6');
-            cout << viindex << ' ' << i << '\n';
-            if (pos6 != -1)
+            //cout << viindex << ' ' << i << '\n';
+            if (currentS.back() == '6')
             {
-                string add = "666";
-                string make = "";
-                int diff = currentS.length() - pos6 - 1;
-                digit -= diff;
-                for (int j=pos6; j < currentS.length(); j++)
+                add = "66";
+                make = "9";   
+                
+                for (int j=currentS.length() - 2; j >= 0; j--)
                 {
-                    add.pop_back();
-                    currentS[j] = '6';
-                    make += "9";
+                    if (currentS[j] == '6')
+                    {
+                        add.pop_back();
+                        make += "9";
+                    }
+                    else
+                        break;
                 }
                 currentS += add;
 
                 for (int j=0; j < stoi(make) + 1; j++)
                 {
-                    string newAdd = "";
-                    for (int k=0; k < diff - 1; k++)
+                    if (i >= index)
+                    {
+                        //cout << currentS << ' ' << i << " end" << '\n';
+                        break;
+                    } 
+
+                    newAdd = "";
+                    for (int k=0; k < make.length() - to_string(j).length(); k++)
                         newAdd += "0";
 
                     newAdd += to_string(j);
-                    currentS = currentS.substr(0, digit - 1) + newAdd;
+                    currentS = currentS.substr(0, digit - make.length()) + newAdd;
                     i++;
-
-                    if (i >= index - 2)
-                        break; 
+                    //cout << currentS << ' ' << i << '\n';
                 }
-                
-                viindex++;
+                i--;
             }
             else
             {
                 currentS = currentS.substr(0, digit - 3) + "666";
-                viindex++;
             }
+            
+            viindex++;
         }
     }
 
