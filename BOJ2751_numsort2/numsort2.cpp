@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-void mergesort(int *current, int* temp, int start, int end)
+void mergesort(int *current, int *temp, int start, int end)
 {
     if (start >= end) return;
     int mid = (start + end) / 2;
@@ -58,4 +58,7 @@ int main()
     mergesort(nums, temparr, 0, n - 1);
     for (int i=0; i < n; i++)
         cout << nums[i] << '\n';
+
+    delete[] nums;
+    delete[] temparr;
 }
