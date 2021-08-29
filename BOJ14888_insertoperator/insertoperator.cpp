@@ -45,6 +45,9 @@ void minmax(int *min, int *max, int n, int *nums, int operators[4])
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
     int n;
     cin >> n;
     
