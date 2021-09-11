@@ -1,2 +1,2 @@
 # BOJSolution
-Baekjoon Algorithm Problem Solutions C/C++
+Baekjoon Algorithm Problem Solutions for C/C++
